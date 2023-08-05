@@ -13,3 +13,4 @@ df = pd.DataFrame(rows)
 generos_ano = ['genres', 'release_date']
 df_genero = df[generos_ano].copy()
 df_genero.fillna('', inplace=True)
+

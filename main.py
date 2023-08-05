@@ -1,18 +1,17 @@
-from typing import Union
-import pandas as pd
-from fastapi import FastAPI
+
+from fastapi import FastAPI, Response
 
 app = FastAPI()
 
-
 @app.get("/")
-def read_root():
-    return {"Hello": "World perrito"}
+async def root():
+    """
+    Root endpoint for the Steam Games API.
+    Returns a HTML response with a centered heading.
+    """
+    content = '<h2 align="center">Steam Games API</h2>'
+    media_type = 'text/html'
+    return Response(content=content, media_type=media_type)
 
-@app.get('/generos')
-def genero(Año: str):
-  datos = pd.read_json("steam_games.json")
-  datos = datos[datos["Year"] == Año]
-  ventas = datos.groupby("Genres")["release_date	"].sum()
-  ventas = ventas.sort_values(ascending=False)
-  return ventas.head(5).index.to_list()
+
+
